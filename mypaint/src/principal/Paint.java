@@ -141,21 +141,25 @@ public class Paint extends MouseAdapter {
 		int x1 = e.getX();
 		int y1 = e.getY();
 		if (botaoSelecionado == botaoRetangulo) {
-			int xc = Math.min(this.x0, x1);
-			int yc = Math.min(this.y0, y1);
-			int largura = Math.abs(x1 - this.x0);
-			int altura = Math.abs(y1 - this.y0);
-			tmp = new Figura(Figura.RETANGULO, xc, yc, xc + largura, yc + altura);
+			tmp = criarFigura(x1, y1,Figura.RETANGULO);
 		} else if (botaoSelecionado == botaoLinha) {
 			tmp = new Figura(Figura.LINHA, this.x0, this.y0, x1, y1);
 		} else {
-			int xc = Math.min(this.x0, x1);
-			int yc = Math.min(this.y0, y1);
-			int largura = Math.abs(x1 - this.x0);
-			int altura = Math.abs(y1 - this.y0);
-			tmp = new Figura(Figura.ELIPSE, xc, yc, xc + largura, yc + altura);
+			tmp = criarFigura(x1,y1,Figura.ELIPSE);
+			
 		}
 		areaDeDesenho.repaint();
+	}
+
+	private Figura criarFigura(int x1, int y1, int tipoFigura) {
+		int xc = Math.min(this.x0, x1);
+		int yc = Math.min(this.y0, y1);
+		int largura = Math.abs(x1 - this.x0);
+		int altura = Math.abs(y1 - this.y0);
+		Figura x = new Figura(tipoFigura, xc, yc, xc + largura, yc + altura);
+		return x;
+		
+		
 	}
 	
 	@Override
@@ -164,19 +168,11 @@ public class Paint extends MouseAdapter {
 		int y1 = e.getY();
 		Figura f;
 		if (botaoSelecionado == botaoRetangulo) {
-			int xc = Math.min(this.x0, x1);
-			int yc = Math.min(this.y0, y1);
-			int largura = Math.abs(x1 - this.x0);
-			int altura = Math.abs(y1 - this.y0);
-			f = new Figura(Figura.RETANGULO, xc, yc, xc + largura, yc + altura);
+			f = criarFigura(x1,y1,Figura.RETANGULO);
 		} else if (botaoSelecionado == botaoLinha) {
 			f = new Figura(Figura.LINHA, this.x0, this.y0, x1, y1);
 		} else {
-			int xc = Math.min(this.x0, x1);
-			int yc = Math.min(this.y0, y1);
-			int largura = Math.abs(x1 - this.x0);
-			int altura = Math.abs(y1 - this.y0);
-			f = new Figura(Figura.ELIPSE, xc, yc, xc + largura, yc + altura);
+			f= criarFigura(x1,y1,Figura.ELIPSE);
 		}
 		figuras.add(f);
 		tmp = null;
